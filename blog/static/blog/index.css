@@ -1,5 +1,5 @@
 #welcome {
-  background: linear-gradient(to right top, #6305dd, #390281);
+  background: linear-gradient(to right top, rgb(225, 136, 250), rgba(64, 178, 248, 0.98));
   padding: 6rem 12%;
 }
 
@@ -13,7 +13,7 @@
   width: 10rem;
   height: 10rem;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
   border: 5px solid white;
   border-radius: 12px;
   background-color: #ffe1bf;
@@ -66,7 +66,7 @@
 #about {
   text-align: center;
   padding: 3rem;
-  background-color: #e48900;
+  background-color: #e188fa;
   margin-top: 5rem;
 }
 
@@ -96,6 +96,6 @@
 .post a:hover,
 .post a:active {
   transform: scale(1.1);
-  background-color: #390281;
+  background-color: rgba(193, 140, 252, 0.98);
   color: white;
 }
