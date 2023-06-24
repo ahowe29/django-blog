@@ -20,16 +20,13 @@ body {
   margin: 3rem 0;
 }
 
-#all-posts-grid {
+ul {
+  list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
   gap: 1.5rem;
   margin: 3rem 0;
   padding: 0;
-}
-
-ul {
-  list-style: none;
 }
 
 .post img {
