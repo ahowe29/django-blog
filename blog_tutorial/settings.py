@@ -11,21 +11,25 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from os import getenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+ENVIRONMENT = getenv("ENVIRONMENT", "dev")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-svj#!d*y)a-z-rxuemf5sc*3kuujsg-9*cseywwr^v)o_03cza'
+SECRET_KEY = getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if ENVIRONMENT == "dev" else False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [
+    getenv("APP_HOST", "127.0.0.1")
+]
 
 
 # Application definition
@@ -75,12 +79,28 @@ WSGI_APPLICATION = 'blog_tutorial.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if ENVIRONMENT == "prod":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': getenv('DATABASE_USERNAME'),
+            'PASSWORD': getenv('DATABASE_PASSWORD'),
+            'HOST': getenv('DATABASE_HOST'),
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'blog_tutorial',
+            'USER': 'test_admin',
+            'PASSWORD': '',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
 
 
 # Password validation
@@ -117,15 +137,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_URL = "/files/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-MEDIA_ROOT = BASE_DIR / "uploads"
-MEDIA_URL = "/files/"
