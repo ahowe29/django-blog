@@ -22,7 +22,7 @@ ENVIRONMENT = getenv("ENVIRONMENT", "dev")
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = getenv("SECRET_KEY")
+SECRET_KEY = 'django-insecure-svj#!d*y)a-z-rxuemf5sc*3kuujsg-9*cseywwr^v)o_03cza'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if ENVIRONMENT == "dev" else False
